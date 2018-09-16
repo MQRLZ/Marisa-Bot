@@ -419,9 +419,6 @@ bot.on("message", function(message) {
 			message.channel.send(message.author + ", ¡te envié una página de ayuda!");
 			return;
 	}
-	if (message == "?av2") {
-		message.channel.send(TOKEN);
-	}
     if (!message.content.startsWith(PREFIX)) return;
 
 	if (!message.guild) {
