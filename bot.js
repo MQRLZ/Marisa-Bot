@@ -11,17 +11,40 @@ var tryargdo = true;
 var usuario1 = [
 	"Mega",
 	"Super",
-	"The"
+	"The",
+	"Argentino",
+	"Lolicon",
+	"Rule34",
+	"Leeroy",
+	"null",
+	"Nisman",
+	"Donald",
+	"Blood",
+	"Dramatic"
 ]
 var usuario2 = [
 	"Manolo",
 	"Marisa",
-	"Gamer"
+	"Gamer",
+	"Groso",
+	"Viewer",
+	"Jenkins",
+	"Donor",
+	"Creator",
+	"Builder",
+	"Youtuber",
+	"Killer"
 ]
 var usuario3 = [
 	"123",
 	"777",
-	"666"
+	"666",
+	"AB",
+	"34",
+	"3,14",
+	"091",
+	"OneTwoThree",
+	"444"
 ]
 
 function doRandomHex() {
