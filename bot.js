@@ -35,7 +35,7 @@ function generateXp() {
 };
 
 function generateuser() {
-	usuario1[Math.floor(Math.random() * usuario1.length)] + usuario2[Math.floor(Math.random() * usuario2.length)] + usuario3[Math.floor(Math.random() * usuario3.length)]
+	return usuario1[Math.floor(Math.random() * usuario1.length)] + usuario2[Math.floor(Math.random() * usuario2.length)] + usuario3[Math.floor(Math.random() * usuario3.length)]
 }
 
 const opts = {
@@ -400,10 +400,10 @@ bot.on("message", function(message) {
 	  help.addField("?role [ ]", "Especifica un rol y consigues información sobre el mismo. 10/10.", true);
 	  help.addField("?quote", "Te da una de 30 quotes/conversaciones relacionadas con Touhou. En español.", true);
 	  help.addField("?exp", "Comprueba tu experiencia actual, tu nivel, y la experiencia necesaria para el siguiente nivel.", true);
-    help.addField("?givecookie [ ]", "¡Dale una galleta a alguien!", true);
+      help.addField("?givecookie [ ]", "¡Dale una galleta a alguien!", true);
 	  help.addField("?cookies [ ]", "Comprueba las galletas de un usuario.", true);
 	  help.addField("?eatcookie", "¡Nom!", true);
-    help.addField("?tweet [ ]", "¡Twittea algo a la cuenta oficial de Marisa-Bot!", true);
+      help.addField("?tweet [ ]", "¡Twittea algo a la cuenta oficial de Marisa-Bot!", true);
 	  help.addField("?omaewa", "NANI?!?!", true);		
 	  help.addField("?say [ ]", "Al usar este comando, el bot repetirá lo que sea que hayas escrito.", true);
 	  help.addField("?robado", "Marisa te mostrará un par de cosas que quizás robó, y quizás no.", true);	
@@ -434,6 +434,9 @@ bot.on("message", function(message) {
 			help2.addField("?dotto", "dotto dotto dotto dotto", true);
 			help2.addField("?hola", "Saludo + mensaje del día = happiness", true);
 			help2.addField("?makai", "Makai = Silenciado por 1 hora.", true);
+			help2.addField("?ligma", "¿Quién tiene Ligma?", true);
+			help2.addField("?generateuser", "Genera un usuario personalizado solo para ti.", true);
+			help2.addField("?invite", "¡Envia la invitación del bot para que la agregues a tu servidor!", true);
 			message.author.send(help2);
 			message.channel.send(message.author + ", ¡te envié una página de ayuda!");
 			return;
