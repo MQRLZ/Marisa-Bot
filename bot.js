@@ -2,12 +2,27 @@ var Discord = require("discord.js");
 var Twitter = require('twitter');
 var mysql = require("mysql");
 var search = require('youtube-search');
-const TOKEN = tokens.env.TOKEN;
+const bottokens = require("./tokens.json");
+const TOKEN = bottokens.TOKEN;
 const PREFIX = "?";
 
 var tryarg = 2;
 var tryargdo = true;
-
+var usuario1 = [
+	"Mega",
+	"Super",
+	"The"
+]
+var usuario2 = [
+	"Manolo",
+	"Marisa",
+	"Gamer"
+]
+var usuario3 = [
+	"123",
+	"777",
+	"666"
+]
 
 function doRandomHex() {
     return '#' + Math.floor(Math.random()*16777215).toString(16)
@@ -19,23 +34,27 @@ function generateXp() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+function generateuser() {
+	usuario1[Math.floor(Math.random() * usuario1.length)] + usuario2[Math.floor(Math.random() * usuario2.length)] + usuario3[Math.floor(Math.random() * usuario3.length)]
+}
+
 const opts = {
 	maxResults: 1,
-	key: tokens.env.key
+	key: bottokens.key
 };
 
 var tclient = new Twitter({
-  consumer_key: tokens.env.consumer_key,
-  consumer_secret: tokens.env.consumer_secret,
-  access_token_key: tokens.env.access_token_key,
-  access_token_secret: tokens.env.access_token_secret
+  consumer_key: bottokens.consumer_key,
+  consumer_secret: bottokens.consumer_secret,
+  access_token_key: bottokens.access_token_key,
+  access_token_secret: bottokens.access_token_secret
 });
 
 var con = mysql.createConnection({
-host: tokens.env.host,
-user: tokens.env.user,
-password: tokens.env.password,
-database: tokens.env.database
+host: bottokens.host,
+user: bottokens.user,
+password: bottokens.password,
+database: bottokens.database
 });
 
 var timenumbers = [
@@ -419,6 +438,7 @@ bot.on("message", function(message) {
 			message.channel.send(message.author + ", ¡te envié una página de ayuda!");
 			return;
 	}
+
     if (!message.content.startsWith(PREFIX)) return;
 
 	if (!message.guild) {
@@ -494,8 +514,12 @@ bot.on("message", function(message) {
 
       case "ligma":
         message.channel.send("Ligma Balls!");
-        break;
-        
+		break;
+		
+		case "generateuser":
+		message.channel.send("¡Este es tu nuevo nombre de usuario! " + generateuser());
+		
+		break;
 		case "nico":
 			message.channel.send("¡NICO NICO NII!");
 			message.channel.send("Uh... eso fue totalmente espontáneo.");
