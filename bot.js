@@ -2,8 +2,7 @@ var Discord = require("discord.js");
 var Twitter = require('twitter');
 var mysql = require("mysql");
 var search = require('youtube-search');
-const bottokens = require("./tokens.json");
-const TOKEN = bottokens.TOKEN;
+const TOKEN = process.env.TOKEN;
 const PREFIX = "?";
 
 var tryarg = 2;
@@ -67,17 +66,17 @@ const opts = {
 };
 
 var tclient = new Twitter({
-  consumer_key: bottokens.consumer_key,
-  consumer_secret: bottokens.consumer_secret,
-  access_token_key: bottokens.access_token_key,
-  access_token_secret: bottokens.access_token_secret
+  consumer_key: process.env.consumer_key,
+  consumer_secret: process.env.consumer_secret,
+  access_token_key: process.env.access_token_key,
+  access_token_secret: process.env.access_token_secret
 });
 
 var con = mysql.createConnection({
-host: bottokens.host,
-user: bottokens.user,
-password: bottokens.password,
-database: bottokens.database
+host: process.env.host,
+user: process.env.user,
+password: process.env.password,
+database: process.env.database
 });
 
 var timenumbers = [
@@ -184,16 +183,6 @@ var fortunes = [
     "Eh... Creo que no.",
     "Eso está más allá de mis capacidades, ze.",
 ];
-
-var cosas = [
-	"Veamos que tengo por aquí... ¡Genial, una GRAND DAD <:granddad:396074481019256837>",
-	"Veamos que tengo por aquí... ¡Genial, una pistola! :gun:",
-	"Veamos que tengo por aquí... ¡Genial, una guitarra! :guitar:",
-	"Veamos que tengo por aquí... ¡Genial, es la ausencia completa de algún tipo de idea!",
-	"Veamos que tengo por aquí... Uh... Es una... foto de Reimu: <:lewd:396073740439519242>",
-	"Veamos que tengo por aquí... Parece una foto de... ohdios: <:npace:396073546335649804>",
-	"Veamos qu- ¿AÚN NO TIENE INSTALADO EL MEJOR ANTIVIRUS DEL PLANETA TIERRA? ¿QUÉ ESPERA? COMPRE PROTEGENT 360 ANTIVIRUS AHORA <:proto:382647940495179786>",
-]
 
 const trivia1 = new Discord.RichEmbed()
 	trivia1.setTitle("¿Cual es el jefe del Stage 3 de Perfect Cherry Blossom?");
@@ -408,62 +397,20 @@ bot.on("message", function(message) {
 	}
 
 	if (message == "?help") {
-	  const help = new Discord.RichEmbed()
-	  help.setTitle("Comandos Disponibles Para Marisa-Bot");
-	  help.setColor(doRandomHex());
-	  help.setDescription("Aquí hay una lista de comandos para Marisa-Bot, se agregarán más con el tiempo.");
-	  help.setFooter("Marisa-Bot | CDPMB");
-	  help.addField("?ping", "Prueba si Marisa-Bot está funcionando.");
-	  help.addField("?horoscopo [ ]", "Este comando predice tu horóscopo para el mes.", true);
-	  help.addField("?8ball [ ]", "Predice tu futuro con preguntas de sí y no.");
-	  help.addField("?trivia", "Te da una pregunta relevante a la serie de videojuegos Touhou Project para que la respondas", true);
-	  help.addField("?votestart [Título] [Duración] [Pregunta]", "Crea una encuesta para que la gente vote. (Solo preguntas de sí y no).", true );
-	  help.addField("?vote, ?votemod, ?voteadmin", "Vota para una encuesta previamente creada.", true);
-	  help.addField("?avatar [ ]", "Consigues la foto de perfil de cualquier usuario que especifiques. ¿Genial, no?", true);
-	  help.addField("?role [ ]", "Especifica un rol y consigues información sobre el mismo. 10/10.", true);
-	  help.addField("?quote", "Te da una de 30 quotes/conversaciones relacionadas con Touhou. En español.", true);
-	  help.addField("?exp", "Comprueba tu experiencia actual, tu nivel, y la experiencia necesaria para el siguiente nivel.", true);
-      help.addField("?givecookie [ ]", "¡Dale una galleta a alguien!", true);
-	  help.addField("?cookies [ ]", "Comprueba las galletas de un usuario.", true);
-	  help.addField("?eatcookie", "¡Nom!", true);
-      help.addField("?tweet [ ]", "¡Twittea algo a la cuenta oficial de Marisa-Bot!", true);
-	  help.addField("?omaewa", "NANI?!?!", true);		
-	  help.addField("?say [ ]", "Al usar este comando, el bot repetirá lo que sea que hayas escrito.", true);
-	  help.addField("?robado", "Marisa te mostrará un par de cosas que quizás robó, y quizás no.", true);	
-	  help.addField("?rinosuke", "Comprueba si Rinosuke está online o no.", true);
-	  help.addField("?help", "Abre este menú.", true);
-	  help.addField("***?help2***", "***Página siguiente.***", true)
-	//Máximos field para los comandos de ayuda: 20	
+		const help = new Discord.RichEmbed()
+		help.setTitle("Comandos Disponibles Para Marisa-Bot");
+		help.setColor(doRandomHex());
+		help.setDescription("¡Bienvenido/a a la página de ayuda! Aquí se encuentran todos los comandos que puedes usar con Marisa-Bot.");
+		help.setFooter("Marisa-Bot | CDPMB");
+		help.addField("| Utilidades |", "?ping | Prueba si Marisa-Bot está funcionando. \n?help | Abre este menú. \n?invite | ¡Envia la invitación del bot para que la agregues a tu servidor! \n?youtube | Busca cualquier video en Youtube, ¡desde la comodidad de tu servidor! \n?avatar | Consigues la foto de perfil de cualquier usuario que especifiques. ¿Genial, no?");
+		help.addField("| Para los admins |", "?votestart [Título] [Duración] [Pregunta] | Crea una encuesta para que la gente vote. (Solo preguntas de sí y no). \n?vote, ?votemod, ?voteadmin | Vota para una encuesta previamente creada. \n?role [ ] | Especifica un rol y consigues información sobre el mismo.");
+		help.addField("| Solo por diversión |", "?tweet [ ] | ¡Twittea algo a la cuenta oficial de Marisa-Bot! \n?hola | Saludo + mensaje del día = happiness \n?generateuser | Genera un usuario personalizado solo para ti. \n?say [ ] | Al usar este comando, el bot repetirá lo que sea que hayas escrito. \n?rinosuke | Comprueba si Rinosuke está online o no. \n?quote | Te da una de 30 quotes/conversaciones relacionadas con Touhou. En español.");
+		help.addField("| ¡Números! |", "?exp |Comprueba tu experiencia actual, tu nivel, y la experiencia necesaria para el siguiente nivel. \n?givecookie [ ] | ¡Dale una galleta a alguien! \n?cookies [ ] | Comprueba las galletas de un usuario. \n?eatcookie | ¡Nom!");
+		help.addField("| Juegos |", "?horoscopo [ ] | Este comando predice tu horóscopo para el mes. \n?8ball [ ] | Predice tu futuro con preguntas de sí y no. \n?trivia | Te da una pregunta relevante a la serie de videojuegos Touhou Project para que la respondas");
 	  message.author.send(help);
 	  message.channel.send(message.author + ", ¡te envié una página de ayuda!");
 	  return;
 }
-
-	if (message == "?help2") {
-		const help2 = new Discord.RichEmbed
-			help2.setTitle("Comandos Disponibles para Marisa-Bot, página 2.");
-			help2.setFooter("Marisa-Bot | CDPMB");
-			help2.setDescription("Aquí hay una lista de comandos para Marisa-Bot, se agregarán más con el tiempo.");
-			help2.setColor(doRandomHex());
-			help2.addField("?fini", "best mod.", true);
-			help2.addField("?MQRLZ", "¡Hey! ¿Qué hace mi nombre en ese comando?");
-			help2.addField("?soleriel", "¡Hey! ¿Qué hace ***soleriel*** en ese comando?", true);
-			help2.addField("?wiggly", "best admin.", true);
-			help2.addField("?monic", "Ladies and gentlemen, MONIC number five", true);
-			help2.addField("?pedro", "Es un joto, pero lo amo.", true);
-			help2.addField("?cinna", "Cientificos han confirmado que limpia bien el horno de tu co-cinna.", true);
-			help2.addField("?gian", "LUCAS", true);
-			help2.addField("?jojos", "¿Quién es este tipo, que dice que le gustan los jojos?", true);
-			help2.addField("?dotto", "dotto dotto dotto dotto", true);
-			help2.addField("?hola", "Saludo + mensaje del día = happiness", true);
-			help2.addField("?makai", "Makai = Silenciado por 1 hora.", true);
-			help2.addField("?ligma", "¿Quién tiene Ligma?", true);
-			help2.addField("?generateuser", "Genera un usuario personalizado solo para ti.", true);
-			help2.addField("?invite", "¡Envia la invitación del bot para que la agregues a tu servidor!", true);
-			message.author.send(help2);
-			message.channel.send(message.author + ", ¡te envié una página de ayuda!");
-			return;
-	}
 
     if (!message.content.startsWith(PREFIX)) return;
 
@@ -499,21 +446,6 @@ bot.on("message", function(message) {
 			message.channel.send(avatar);
 		break;
 
-		case "avatarid":
-		var avataridget = message.author
-
-			if (args[1]) {
-			avataridget = "<@" + args[1] + ">"
-			console.log("avatarget = " + avataridget)}
-	
-			var avatarid = new Discord.RichEmbed
-			avatarid.setTitle("¡Imagen encontrada!");
-			avatarid.setDescription("Oh, " + avataridget + ", qué avatar más bonito:");
-			avatarid.setColor(doRandomHex());
-			avatarid.setImage(avataridget.avatarURL)
-			message.channel.send(avatarid);
-		break;
-
 		case "invite":
 		var invite = new Discord.RichEmbed 
 		invite.setDescription("¡Hey! Puedes usar este [link](https://discordapp.com/oauth2/authorize?client_id=382383319762862081&scope=bot&permissions=10) para invitarme a algún servidor!");
@@ -522,67 +454,17 @@ bot.on("message", function(message) {
 		message.channel.send(invite);
 		break;
 
-		case "matriarcado":
-		message.channel.send("**Empieza el matriarcado.**");
-		break;
-
 		case "quote":
 			message.channel.send(quotes[Math.floor(Math.random() * quotes.length)]);		
 		break;
-
-        case "soleriel":
-        	message.channel.send("Hace los mejores remixes del mundo.");
-        	break;
 
 		case "hola":
 			message.channel.send(message.author + ", ¡hola! " + hola[Math.floor(Math.random() * hola.length)])
 			break;		
 
-      case "ligma":
-        message.channel.send("Ligma Balls!");
-		break;
-		
 		case "generateuser":
 		message.channel.send("¡Este es tu nuevo nombre de usuario! " + generateuser());
-		
-		break;
-		case "nico":
-			message.channel.send("¡NICO NICO NII!");
-			message.channel.send("Uh... eso fue totalmente espontáneo.");
-			break;
-
-        case "omaewa":
-        	console.log("[Maymay Bot] --------------Omae wa mou shindeiru-------------------------");
-        	message.channel.send("<:zun:384531832894652417> Omae wa mou shindeiru.");
-        	message.channel.send("<:isthatso:384520274328158218> NANI!?!?");
-        	message.channel.send("<:lazun:384520173492895757>");
-        	message.channel.send("<:rumiashock:384520226064039946>");
-        	break;
-
-        case "robado":
-        	message.channel.send(cosas[Math.floor(Math.random() * cosas.length)]);
-        	break;
-
-		case "fini":
-			message.channel.send("Piensa que Yuyuko es mejor que yo, ¡Jajaja! Qué idiota.");
-			break;
-
-		case "cinna":
-			message.channel.send("El mejor trap del servidor.");
-			break;
-
-		case "dotto":
-			message.channel.send("dotto dotto dotto dotto dotto dotto dotto dotto dotto dotto dotto dotto dotto dotto");
-			break;
-
-        case "everyone":
-        	message.channel.send("<@!191405550821441536> es nuestro everyone.");
-        	break;
-
-        case "jojos":
-            message.channel.send("A <@!191405550821441536> le gustan los jojos.");
-			break;
-
+	
 		case "say":
 			if (!args[1]) {
 				message.channel.send("¡No puedo enviar un mensaje en blanco! :c");
@@ -593,37 +475,6 @@ bot.on("message", function(message) {
 			message.channel.send(args.slice(1).join(" "));
 			break;
 
-		case "pedro":
-			message.channel.send("a ver cuando dejas de decir joterias");
-			break;
-
-		case "gian":
-			message.channel.send("Lucas, apaga el ventilador y márchate.");
-			break;
-
-		case "makai":
-			let makaitar = message.mentions.users.first() || message.author;
-			message.channel.send("You dun goofed, " + makaitar + ".");
-			break;
-
-		case "sobrerektb":
-			message.channel.send("Ahora... me gustaría hablar en serio.");
-			message.channel.send("YOU DUN GOOFED THAT'S WHAT");
-
-			break;
-
-		case "monic":
-			message.channel.send("A LITTLE BIT OF MO- *gets kicked in the face*");
-			break;
-
-		case "wiggly":
-			message.channel.send("Cualquier imagen +18 de nico hará que te banneen.");
-			break;
-			
-        case "mqrlz":
-        	message.channel.send("Humilde no programador, mejor persona.");
-			break;
-			
 		case "rinosuke":
 		
 			let rino = message.guild.member("211328401556897792")
@@ -715,52 +566,12 @@ bot.on("message", function(message) {
 		return
 		}
 
-		var bdg = 369889427767558145
-		var servertrucho = 436294089059860480
-
 		if (!args[1]) {
 			message.channel.send("¡No puedo twittear un mensaje en blanco!");
 		return
 		}
 
-		
-		var rektb = 292673241129156618
-		var rektb2 = "Pene"
-		var rektb3 = "Pene"
-		var rektb4 = "Pene"
-		var rektb5 = "Pene"
-		var rektb6 = "Pene"
-
-		if (message.author.id == rektb) {
-			message.channel.send("lol nope");
-			return
-		}
-		if (message.author.id == rektb2) {
-			message.channel.send("lol nope");
-			return
-		}
-		if (message.author.id == rektb3) {
-			message.channel.send("lol nope");
-			return
-		}
-		if (message.author.id == rektb4) {
-			message.channel.send("lol nope");
-			return
-		}
-		if (message.author.id == rektb5) {
-			message.channel.send("lol nope");
-			return
-		}
-		if (message.author.id == rektb6) {
-			message.channel.send("lol nope");
-			return
-		}
-
-		if (message.guild.id == bdg || servertrucho) {
-
-		let megasupertweet = args[1];
-        tryarg = 2;
-        tryargdo = true;
+		tryargdo = true;
         while(tryargdo==true) {
             if(args[tryarg]) {
                 megasupertweet = megasupertweet + " " + args[tryarg];
@@ -768,7 +579,6 @@ bot.on("message", function(message) {
 
             } else {
                 tryargdo = false;
-
             }
 		}
 			message.channel.send("Intentando enviar el tweet...");
@@ -782,11 +592,7 @@ bot.on("message", function(message) {
 				message.channel.send("¡Yoink! ¡Mensaje twitteado correctamente! Puedes verlo en mi cuenta de Twitter: https://twitter.com/MarisaK_Bot")
 			}
 		  });
-	}
-		else {
-		message.channel.send("Los tweets solo se pueden enviar desde Bordes de Gensokyo, ze.")
-		return
-	}
+	
 		break;
         
     	case "givecookie":
@@ -1154,20 +960,23 @@ bot.on("message", function(message) {
 			message.channel.send(res);
 			already = false;
 
-		if (admnovotes == 2)
+		if (admnovotes == 2) {
 			message.channel.send("Respuesta final: NO.");
-		return;
+		return}
 
-		if (modnovotes == 5)
+		if (modnovotes == 5){
 			message.channel.send("Respuesta final: NO.");
-		return;
+		return;}
 
-		if (modyesvotes >= 3)
-		if (admyesvotes >= 1)
+		if (modyesvotes >= 3){
 			message.channel.send("Respuesta final: SÍ.")
-		return;
+		}
+		if (admyesvotes >= 1){
+			message.channel.send("Respuesta final: SÍ.")
+		return }
 
 		}, duration);
+
 		
 		break;
 
