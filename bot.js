@@ -464,7 +464,8 @@ bot.on("message", function(message) {
 
 		case "generateuser":
 		message.channel.send("¡Este es tu nuevo nombre de usuario! " + generateuser());
-	
+		break;
+		
 		case "say":
 			if (!args[1]) {
 				message.channel.send("¡No puedo enviar un mensaje en blanco! :c");
